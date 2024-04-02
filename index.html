@@ -71,15 +71,16 @@
 
 function validateYouTubeUrl(url) {
   // Regular expression to validate YouTube video URL
-  var regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})$/;
+  var regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtube\.com\/v\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
 
   // Test the input URL against the regular expression
   if (regExp.test(url)) {
     return true; // URL is a valid YouTube video URL
   } else {
     return false; // URL is not a valid YouTube video URL
-  }
+   }
 }
+        
 
 function extractVideoUrl() {
   // Get the input value from the text field
