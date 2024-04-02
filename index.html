@@ -57,30 +57,49 @@
 
     <script>
         function extractVideoId(url) {
-            const regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/)?([a-zA-Z0-9_-]{11})/;
-            const match = url.match(regex);
-            if (match && match[1]) {
-                return match[1];
-            } else {
-                return null;
-            }
-        }
+  // Check if the URL is a valid YouTube URL
+  const regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = url.match(regex);
 
-        function validateYouTubeUrl(url) {
-            var regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/)?([a-zA-Z0-9_-]{11})$/;
-            return regExp.test(url);
-        }
+  // Extract and return the video ID
+  if (match && match[1]) {
+    return match[1];
+  } else {
+    return null;
+  }
+}
 
-        function extractVideoUrl() {
-            var videoUrl = document.getElementById("videoUrlInput").value;
-            if (validateYouTubeUrl(videoUrl)) {
-                var videoId = extractVideoId(videoUrl);
-                var rawVideoUrl = "https://www.youtube.com/watch?v=" + videoId;
-                document.getElementById("output").innerHTML = "Raw Video URL: " + rawVideoUrl;
-            } else {
-                document.getElementById("output").innerHTML = "Invalid YouTube video URL";
-            }
-        }
+function validateYouTubeUrl(url) {
+  // Regular expression to validate YouTube video URL
+  var regExp = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})$/;
+
+  // Test the input URL against the regular expression
+  if (regExp.test(url)) {
+    return true; // URL is a valid YouTube video URL
+  } else {
+    return false; // URL is not a valid YouTube video URL
+  }
+}
+
+function extractVideoUrl() {
+  // Get the input value from the text field
+  var videoUrl = document.getElementById("videoUrlInput").value;
+
+  // Check if the input is a valid YouTube video URL
+  if (validateYouTubeUrl(videoUrl)) {
+    // Extract the video ID from the URL
+    var videoId = extractVideoId(videoUrl);
+
+    // Construct the raw video URL using the video ID
+    var rawVideoUrl = "https://www.youtube.com/watch?v=" + videoId;
+
+    // Display the raw video URL in the HTML document
+    document.getElementById("output").innerHTML = "Raw Video URL: " + rawVideoUrl;
+  } else {
+    // Display an error message if the input is not a valid YouTube video URL
+    document.getElementById("output").innerHTML = "Invalid YouTube video URL";
+  }
+}
     </script>
 </body>
     </html>
